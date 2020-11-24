@@ -30,8 +30,10 @@ public class UndigraphCycle {
         for (int w : G.adj(v)) {
 
             // short circuit if cycle already found
-            if (cycle != null) return;
-
+            if (hasCycle()) {
+				return;
+			}
+			
             if (!marked[w]) {
                 edgeTo[w] = v;
                 dfsUtil(G, v, w);

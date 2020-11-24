@@ -10,6 +10,9 @@ public class UndigraphBipartite {
 		
 		marked = new boolean[graph.getNumV()];
 		color = new boolean[graph.getNumV()];
+
+		isBipartite = true;
+
 		for(int i = 0; i < graph.getNumV(); i++) {
 			if(!marked[i]) {
 				dfsUtil(graph, i);
@@ -28,7 +31,6 @@ public class UndigraphBipartite {
 				isBipartite = false;
 			}
 		}
-		isBipartite = true;
 	}
 
 	public boolean isBipartite() {

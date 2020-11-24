@@ -13,6 +13,7 @@ public class DigraphCycle {
 		
 		marked = new boolean[digraph.getNumV()];
 		edgeTo =  new int[digraph.getNumE()];
+		
 		for(int i = 0; i < digraph.getNumV(); i++) {
 			if(!marked[i]) {
 				dfsUtil(digraph, i);

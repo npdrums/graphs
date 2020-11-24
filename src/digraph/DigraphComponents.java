@@ -5,18 +5,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/*
-Beleske sa vezbi:
-
-Komponenta je slicna kao kod neusmerenog grafa,
-ali ovde je bitna razlika da smo tamo mogli da krenemo od proizvoljnog cvora
-i nadjemo celu komponentu, a ovde nije svejedno zbog usmerenosti. 
-Treba obratiti paznju da prilikom nalazenja komponente,
-mozemo naici da smo povezani sa nekom koja je vec deklarisana
-i adekvatno prilagoditi podatke (tj spojiti tu komponentu sa tekucom,
-ili nasu ubaciti u tu vec postojecu).	 
-*/
-
 public class DigraphComponents {
 
 	private boolean[] marked;
@@ -31,32 +19,37 @@ public class DigraphComponents {
 		for(int i = 0; i < digraph.getNumV(); i++) {
 			if(!marked[i]) {
 				component = new HashSet<Integer>();
-				DFSCompUtil(digraph, i);
+				dfsUtil(digraph, i);
 				addComponentToList(component);
 			}
 		}
 	}
 	
-	public void DFSCompUtil(Digraph digraph, int v) {
+	public void dfsUtil(Digraph digraph, int v) {
+
 		marked[v] = true;
 		component.add(v);
 		for(int w: digraph.adj(v)) {
 			if(!component.contains(w)) {
-				DFSCompUtil(digraph, w);
+				dfsUtil(digraph, w);
 			}
 		}
 	}
 	
-	private void addComponentToList(Set<Integer> comp) {
+	private void addComponentToList(Set<Integer> component) {
+
+		// If any vertex from the component is already in a component within the list
+		// We just merge the components
 		for(Set<Integer> set: list) {
 			for(int v : set) {
-				if(comp.contains(v)) {
-					set.addAll(comp);
+				if(component.contains(v)) {
+					set.addAll(component);
 					return;
 				}
 			}
 		}
-		list.add(comp);
+
+		list.add(component);
 	 }
 
 	public List<Set<Integer>> getDigraphComponents() {
