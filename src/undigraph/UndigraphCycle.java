@@ -30,9 +30,7 @@ public class UndigraphCycle {
         for (int w : G.adj(v)) {
 
             // short circuit if cycle already found
-            if (hasCycle()) {
-				return;
-			}
+            if (hasCycle()) { return; }
 			
             if (!marked[w]) {
                 edgeTo[w] = v;
