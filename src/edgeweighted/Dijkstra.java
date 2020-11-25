@@ -71,8 +71,8 @@ public class Dijkstra {
 		Edge edge = edgeTo[w];
 		while(edge != null) {
 			path.push(edge);
-			int v = edge.other(w);
-			edge = edgeTo[v];
+			w = edge.other(w);
+			edge = edgeTo[w];
 		}
 		
 		return path;
