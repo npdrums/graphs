@@ -8,12 +8,14 @@ public class ReachableVertex {
 	private Set<Integer> reachFrom;
 	private Set<Integer> reachTo;
 	private Digraph digraph;
+	private TransitiveClosure transitiveClosure;
 	
-	public ReachableVertex(TransitiveClosure transitiveClosure) {
+	public ReachableVertex(Digraph digraph) {
 		
 		reachFrom = new HashSet<Integer>();
 		reachTo = new HashSet<Integer>();
-		digraph = transitiveClosure.getTransitiveClosure();
+		transitiveClosure = new TransitiveClosure(digraph);
+		this.digraph = transitiveClosure.getTransitiveClosure();
 	}
 	
 	public Set<Integer> getWithReachFromEveryone() {
