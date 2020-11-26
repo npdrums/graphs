@@ -137,7 +137,7 @@ public class Main {
 		
 		// VERTEX REACH
 		System.out.println("Vertices that can reach to every other vertex: ");
-		ReachableVertex reachableVertex = new ReachableVertex(transitiveClosure);
+		ReachableVertex reachableVertex = new ReachableVertex(digraph);
 		for(Integer vertex : reachableVertex.getWithReachToEveryone()) {
 			System.out.println(vertex);
 		}
@@ -153,7 +153,7 @@ public class Main {
 		spanningTree.getSpanningTree().print();
 
 		System.out.println("Spanning tree (optimized): ");
-		SpanningTreeOpt spanningTreeOpt = new SpanningTreeOpt(reachableVertex, digraph);
+		spanningTree.getSpanningTreeOpt();
 		
 		/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 		

@@ -8,21 +8,23 @@ public class SpanningTree {
 	private Set<Integer> marked;
 	private Digraph digraph;
 	private Digraph spanningTree;
+	private ReachableVertex reachableVertex;
 	
 	public SpanningTree(Digraph digraph) {
 		
 		this.digraph = digraph;
 		spanningTree = new Digraph(digraph.getNumV());
 		marked = new HashSet<Integer>();
+		reachableVertex = new ReachableVertex(digraph);
 	}
 	
-	private void dfsTreeUtil(int v) {
+	private void dfsUtil(int v) {
 		
 		marked.add(v);
 		for(int w : digraph.adj(v)) {
 			if(!marked.contains(w)) {
 				spanningTree.addEdge(v, w);
-				dfsTreeUtil(w);
+				dfsUtil(w);
 			}
 		}
 	}
@@ -30,9 +32,22 @@ public class SpanningTree {
 	public Digraph getSpanningTree() {
 		
 		for(int i = 0; i < digraph.getNumV(); i++) {
-			dfsTreeUtil(i);
+			dfsUtil(i);
 			if(marked.size() == digraph.getNumV()) {
 				return spanningTree;
+			}
+		}
+		
+		return null;
+	}
+	
+	public Digraph getSpanningTreeOpt() {
+		
+		// Running only from vertices that can reach to every other vertex!
+		for(int v : reachableVertex.getWithReachToEveryone()) {
+			dfsUtil(v);
+			if(marked.size() == digraph.getNumV() - 1) {
+				return spanningTree; // Returns the first one!
 			}
 		}
 		
