@@ -38,7 +38,7 @@ public class PrimMSTLazy {
 
 	private void prim(EdgeWeightedGraph ewgraph, int s) {
 		
-		mark(ewgraph, s);
+		visit(ewgraph, s);
 		while(!pq.isEmpty()) {
 			Edge edge = pq.remove();
 			int v = edge.either();
@@ -53,16 +53,16 @@ public class PrimMSTLazy {
 			weight += edge.getWeight();
 			
 			if(!marked.contains(v)) {
-				mark(ewgraph, v);
+				visit(ewgraph, v);
 			}
 			
 			if(!marked.contains(w)) {
-				mark(ewgraph, w);
+				visit(ewgraph, w);
 			}
 		}
 	}
 	
-	private void mark(EdgeWeightedGraph ewgraph, int v) {
+	private void visit(EdgeWeightedGraph ewgraph, int v) {
 		
 		marked.add(v);
 		for(Edge edge: ewgraph.adj(v)) {
